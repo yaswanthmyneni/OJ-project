@@ -17,12 +17,13 @@ const signup = async (req, res) => {
   const user = new User({ email, password });
   await user.save();
 
-  const authToken = user.generateJWT();
+  const token = user.generateJWT();
 
-  // optional (session cookie)
-  req.session = {
-    authToken,
-  };
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+  });
 
   res.status(201).json(user);
 };
@@ -43,8 +44,13 @@ const login = async (req, res) => {
 
     const token = user.generateJWT();
 
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    });
+
     res.json({
-      token,
       user: {
         id: user._id,
         email: user.email,
@@ -55,4 +61,9 @@ const login = async (req, res) => {
   }
 };
 
-export { signup, login };
+const logout = (req, res) => {
+  res.clearCookie("token");
+  res.json({ msg: "User logged out!" });
+};
+
+export { signup, login, logout };
