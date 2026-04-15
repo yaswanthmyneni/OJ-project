@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function Register() {
+const Register = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
@@ -33,4 +33,6 @@ export default function Register() {
       <button onClick={(e) => handleSignup(e)}>Register</button>
     </form>
   );
-}
+};
+
+export { Register };

@@ -1,7 +1,8 @@
+import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
@@ -33,4 +34,6 @@ export default function Login() {
       <button onClick={() => navigate("/register")}>Signup</button>
     </form>
   );
-}
+};
+
+export { Login };
