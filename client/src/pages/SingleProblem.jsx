@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Compiler } from "../components";
 
 const SingleProblem = () => {
   const [problem, setProblem] = useState(null);
@@ -46,6 +47,8 @@ const SingleProblem = () => {
 
       <h3>Output</h3>
       <pre>{JSON.stringify(problem.output, null, 2)}</pre>
+
+      <Compiler />
     </div>
   );
 };

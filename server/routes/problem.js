@@ -1,26 +1,28 @@
 import { Router } from "express";
-import { createProblem, getProblems, getProductById } from "../controllers/problem.js";
+import {
+  createProblem,
+  getProblems,
+  getProductById,
+} from "../controllers/problem.js";
 
-const router = new Router();
+const problemRouter = new Router();
 
 /**
  * @method POST
  * @path /problem/create
  */
-router.post("/create", createProblem);
-
+problemRouter.post("/create", createProblem);
 
 /**
  * @method GET
  * @path /problem/
  */
-router.get("/", getProblems);
-
+problemRouter.get("/", getProblems);
 
 /**
  * @method GET
  * @path /problem/:id
  */
-router.get("/:id", getProductById);
+problemRouter.get("/:id", getProductById);
 
-export default router;
+export { problemRouter };

@@ -1,18 +1,13 @@
 import express from "express";
 import { connectToDB } from "./database/db.js";
-import userRouter from "./routes/user.js";
-import problemRouter from "./routes/problem.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-// import multer from "multer";
+import { problemRouter, userRouter, compileRouter } from "./routes/index.js";
 import "dotenv/config";
 
 const app = express();
 const PORT = process.env.PORT || 8001;
 
-// const upload = multer({
-//   dest: "uploads/",
-// });
 app.use(express.json());
 app.use(
   cors({
@@ -25,6 +20,7 @@ app.use(cookieParser());
 // Routes
 app.use("/user", userRouter);
 app.use("/problem", problemRouter);
+app.use("/compile", compileRouter);
 
 connectToDB();
 app.listen(PORT, () => {
