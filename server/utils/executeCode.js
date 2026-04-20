@@ -8,7 +8,7 @@ if (!fs.existsSync(outputPath)) {
   fs.mkdirSync(outputPath, { recursive: true });
 }
 
-const executeCode = (filepath) => {
+const executeCode = (filepath, inputFilePath) => {
   const [jobId, lang] = path.basename(filepath).split(".");
   let outPath = "";
 
@@ -19,11 +19,11 @@ const executeCode = (filepath) => {
   return new Promise((resolve, reject) => {
     let command = "";
     if (lang === "py") {
-      command = `python3 ${filepath}`;
+      command = `python3 ${filepath} < ${inputFilePath}`;
     } else if (lang === "js") {
-      command = `node ${filepath}`;
+      command = `node ${filepath} < ${inputFilePath}`;
     } else {
-      command = `g++ ${filepath} -o ${outPath} && cd ${outputPath} && ./${jobId}.out`;
+      command = `g++ ${filepath} -o ${outPath} && cd ${outputPath} && ./${jobId}.out < ${inputFilePath}`;
     }
 
     exec(command, (error, stdout, stderr) => {
