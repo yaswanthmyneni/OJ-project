@@ -20,19 +20,34 @@ const Login = () => {
   };
 
   return (
-    <form>
-      <input
-        placeholder="Email"
-        onChange={(e) => setForm({ ...form, email: e.target.value })}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={(e) => setForm({ ...form, password: e.target.value })}
-      />
-      <button onClick={(e) => handleLogin(e)}>Login</button>
-      <button onClick={() => navigate("/register")}>Signup</button>
-    </form>
+    <section className="flex flex-col justify-center items-center mt-[10rem]">
+      <h1 className="text-3xl font-semibold mb-6 text-gray-800">Login</h1>
+      <form className="flex flex-col ">
+        <input
+          placeholder="Email"
+          onChange={(e) => setForm({ ...form, email: e.target.value })}
+          className="w-[20rem] mb-4 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setForm({ ...form, password: e.target.value })}
+          className="w-[20rem] mb-6 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <button
+          onClick={(e) => handleLogin(e)}
+          className="w-[20rem] cursor-pointer bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200 mb-3"
+        >
+          Login
+        </button>
+        <button
+          onClick={() => navigate("/register")}
+          className="w-[20rem] cursor-pointer border border-gray-300 py-2 rounded-lg hover:bg-gray-100 transition duration-200"
+        >
+          Signup
+        </button>
+      </form>
+    </section>
   );
 };
 

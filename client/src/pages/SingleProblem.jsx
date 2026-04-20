@@ -35,20 +35,40 @@ const SingleProblem = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div>
-      <h2>{problem.title}</h2>
-      <p>
-        <strong>Author:</strong> {problem.author}
-      </p>
-      <p>{problem.statement}</p>
+    <div className="min-h-screen bg-gray-100 p-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="bg-white shadow-lg rounded-xl p-6 overflow-auto">
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">
+            {problem.title}
+          </h2>
 
-      <h3>Input</h3>
-      <pre>{JSON.stringify(problem.input, null, 2)}</pre>
+          <p className="text-gray-600 mb-2">
+            <strong>Author:</strong> {problem.author}
+          </p>
 
-      <h3>Output</h3>
-      <pre>{JSON.stringify(problem.output, null, 2)}</pre>
+          <p className="mb-4 text-gray-700 whitespace-pre-wrap">
+            {problem.statement}
+          </p>
 
-      <Compiler />
+          <div className="mb-4">
+            <h3 className="font-semibold text-gray-800">Input</h3>
+            <pre className="bg-gray-100 p-2 rounded text-sm overflow-x-auto">
+              {JSON.stringify(problem.input, null, 2)}
+            </pre>
+          </div>
+
+          <div>
+            <h3 className="font-semibold text-gray-800">Output</h3>
+            <pre className="bg-gray-100 p-2 rounded text-sm overflow-x-auto">
+              {JSON.stringify(problem.output, null, 2)}
+            </pre>
+          </div>
+        </div>
+
+        <div className="bg-white shadow-lg rounded-xl p-4">
+          <Compiler />
+        </div>
+      </div>
     </div>
   );
 };

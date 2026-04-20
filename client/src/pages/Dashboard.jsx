@@ -12,16 +12,32 @@ const Dashboard = () => {
   };
 
   return (
-    <>
-      <h1>hello</h1>
-      <button onClick={() => navigate("/create-problem")}>
-        Create Problem
-      </button>
-      <button onClick={() => navigate("/problem")}>
-        Problems
-      </button>
-      <button onClick={(e) => handleLogout(e)}>logout</button>
-    </>
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
+      <h1 className="text-4xl font-bold mb-10 text-gray-800">Dashboard</h1>
+
+      <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md flex flex-col gap-4">
+        <button
+          onClick={() => navigate("/create-problem")}
+          className="bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition cursor-pointer"
+        >
+          Create Problem
+        </button>
+
+        <button
+          onClick={() => navigate("/problem")}
+          className="hover:bg-green-700 text-white py-2 rounded-lg bg-green-600 transition cursor-pointer"
+        >
+          Problems
+        </button>
+
+        <button
+          onClick={handleLogout}
+          className="bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition cursor-pointer"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
   );
 };
 
