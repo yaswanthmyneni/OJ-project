@@ -15,7 +15,6 @@ const createProblem = async (req, res) => {
       data: problem,
     });
   } catch (error) {
-    console.error(error);
     res.status(400).json({
       success: false,
       message: error.message,

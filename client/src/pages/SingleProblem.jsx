@@ -49,24 +49,23 @@ const SingleProblem = () => {
           <p className="mb-4 text-gray-700 whitespace-pre-wrap">
             {problem.statement}
           </p>
-
           <div className="mb-4">
             <h3 className="font-semibold text-gray-800">Input</h3>
-            <pre className="bg-gray-100 p-2 rounded text-sm overflow-x-auto">
-              {JSON.stringify(problem.input, null, 2)}
+            <pre className="bg-gray-100 p-2 rounded text-sm overflow-x-auto whitespace-pre-line">
+              {problem?.sampleInput.replace(/\\n/g, "\n")}
             </pre>
           </div>
 
           <div>
             <h3 className="font-semibold text-gray-800">Output</h3>
             <pre className="bg-gray-100 p-2 rounded text-sm overflow-x-auto">
-              {JSON.stringify(problem.output, null, 2)}
+              {problem?.sampleOutput}
             </pre>
           </div>
         </div>
 
         <div className="bg-white shadow-lg rounded-xl p-4">
-          <Compiler />
+          <Compiler problemId={id} />
         </div>
       </div>
     </div>
