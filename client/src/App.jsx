@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   Dashboard,
   Login,
-  ProblemForm,
+  CreateProblem,
   ProblemsList,
   Register,
   SingleProblem,
@@ -15,7 +15,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/create-problem" element={<ProblemForm />} />
+        <Route path="/create-problem" element={<CreateProblem />} />
         <Route path="/problem" element={<ProblemsList />} />
         <Route path="/problem/:id" element={<SingleProblem />} />
       </Routes>

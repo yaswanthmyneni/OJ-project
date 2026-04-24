@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 
 const testCaseSchema = new mongoose.Schema({
   input: {
-    type: [[Number]],
+    type: String,
     required: true,
   },
   output: {
-    type: [[Number]],
+    type: String,
     required: true,
   },
 });
@@ -27,15 +27,15 @@ const problemSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    input: {
-      type: [[Number]],
+    sampleInput: {
+      type: String,
       required: true,
     },
-    output: {
-      type: [[Number]],
+    sampleOutput: {
+      type: String,
       required: true,
     },
-    testcase: testCaseSchema,
+    testcases: [testCaseSchema],
   },
   {
     timestamps: true,
