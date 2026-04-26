@@ -43,7 +43,11 @@ const compileCode = async (req, res) => {
 
     res.json({ filePath, output });
   } catch (error) {
-    res.status(500).json({ error });
+    console.error("COMPILER ERROR:", error);
+
+    return res.status(500).json({
+      error: error.message || "Execution failed",
+    });
   }
 };
 

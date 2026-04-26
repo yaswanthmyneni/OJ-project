@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  server:
+    build: ./server
+    ports:
+      - "8001:8001"
+    depends_on:
+      - compiler
+    environment:
+      - COMPILE_URL=http://compiler:6000
+
+  compiler:
+    build: ./compiler
+    environment:
+      - SERVER_URL=http://server:8001

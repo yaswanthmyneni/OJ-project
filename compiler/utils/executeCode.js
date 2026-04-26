@@ -26,14 +26,16 @@ const executeCode = (filepath, inputFilePath) => {
       command = `g++ ${filepath} -o ${outPath} && cd ${outputPath} && ./${jobId}.out < ${inputFilePath}`;
     }
 
-    exec(command, (error, stdout, stderr) => {
+    exec(command, { timeout: 5000 }, (error, stdout, stderr) => {
       if (error) {
-        reject({ error, stderr });
+        return reject(error.message);
       }
-      if (stderr) {
-        reject(stderr);
+
+      if (stderr && !stdout) {
+        return reject(stderr);
       }
-      resolve(stdout);
+
+      return resolve(stdout);
     });
   });
 };

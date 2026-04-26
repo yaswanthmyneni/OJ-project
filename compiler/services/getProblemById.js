@@ -1,8 +1,10 @@
 import axios from "axios";
 
 const getProblemById = async (id) => {
+  const SERVER_URL = `${process.env.SERVER_URL}/problem` || "http://localhost:8001/problem";
+
   try {
-    const res = await axios(`${process.env.SERVER_URL}/${id}`, {
+    const res = await axios.get(`${SERVER_URL}/${id}`, {
       withCredentials: true,
     });
 
