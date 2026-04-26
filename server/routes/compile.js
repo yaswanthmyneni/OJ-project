@@ -1,6 +1,5 @@
 import { Router } from "express";
-import { compileCode } from "../controllers/compileCode.js";
-import { runTestCases } from "../controllers/runTestCases.js";
+import { compileRun, compileSubmit } from "../controllers/compile.js";
 
 const compileRouter = new Router();
 
@@ -8,13 +7,12 @@ const compileRouter = new Router();
  * @method POST
  * @path /compile/run
  */
-compileRouter.post("/run", compileCode);
-
+compileRouter.post("/run", compileRun);
 
 /**
  * @method POST
  * @path /compile/submit
  */
-compileRouter.post("/submit", runTestCases);
+compileRouter.post("/submit", compileSubmit);
 
 export { compileRouter };

@@ -1,4 +1,4 @@
-import Problem from "../models/problem.js";
+import { getProblemById } from "../services/getProblemById.js";
 import {
   executeCode,
   generateFile,
@@ -23,7 +23,7 @@ const compileCode = async (req, res) => {
         });
       }
 
-      const problem = await Problem.findById(problemId);
+      const problem = await getProblemById(problemId);
 
       if (!problem || !problem.testcases.length) {
         return res.status(404).json({

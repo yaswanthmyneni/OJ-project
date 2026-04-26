@@ -1,15 +1,15 @@
-import Problem from "../models/problem.js";
 import {
   executeCode,
   generateFile,
   generateInputFile,
 } from "../utils/index.js";
+import { getProblemById } from "../services/getProblemById.js";
 
 const runTestCases = async (req, res) => {
   const { problemId, lang = "cpp", code } = req.body;
 
   try {
-    const problem = await Problem.findById(problemId);
+    const problem = await getProblemById(problemId);
 
     if (!problem) {
       return res.status(404).json({ error: "Problem not found" });
@@ -34,16 +34,6 @@ const runTestCases = async (req, res) => {
 
         if (!passed) {
           allPassed = false;
-          res.json({
-            success: true,
-            allPassed,
-            failedResult: {
-              testcase: i + 1,
-              passed,
-              expected: expectedOutput,
-              got: output.trim(),
-            },
-          });
         }
 
         results.push({
