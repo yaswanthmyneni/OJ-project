@@ -2,7 +2,12 @@ import express from "express";
 import { connectToDB } from "./database/db.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import { problemRouter, userRouter, compileRouter } from "./routes/index.js";
+import {
+  problemRouter,
+  userRouter,
+  compileRouter,
+  aiRouter,
+} from "./routes/index.js";
 import "dotenv/config";
 
 const app = express();
@@ -21,6 +26,7 @@ app.use(cookieParser());
 app.use("/user", userRouter);
 app.use("/problem", problemRouter);
 app.use("/compile", compileRouter);
+app.use("/ai", aiRouter);
 
 connectToDB();
 app.listen(PORT, () => {

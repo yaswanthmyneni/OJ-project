@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Editor from "@monaco-editor/react";
 import axios from "axios";
+import { CodeModal } from "./CodeModal";
 
 const Compiler = ({ problemId }) => {
   const [code, setCode] = useState(`// C++ program
@@ -14,6 +15,9 @@ int main() {
   const [language, setLanguage] = useState("cpp");
   const [output, setOutput] = useState("");
   const [input, setInput] = useState("");
+  const [showAnalysis, setShowAnalysis] = useState(false);
+  const [analysis, setAnalysis] = useState("");
+  const [analyzing, setAnalyzing] = useState(false);
 
   const handleLanguage = (e) => {
     setLanguage(e.target.value);
@@ -101,6 +105,36 @@ int main() {
     }
   };
 
+  const handleAnalyze = async () => {
+    if (!code.trim()) return;
+
+    try {
+      setAnalyzing(true);
+
+      const res = await axios.post("http://localhost:8001/ai/code-analysis", {
+        prompt: `
+Language: ${language}
+
+Code:
+${code}
+
+Analyze this code and provide:
+- Explanation
+- Bugs (if any)
+- Improvements
+`,
+      });
+
+      setAnalysis(res.data.reply);
+      setShowAnalysis(true);
+    } catch (err) {
+      console.log(err?.response?.data || err.message);
+      setAnalysis("Error analyzing code");
+    } finally {
+      setAnalyzing(false);
+    }
+  };
+
   return (
     <div className="flex flex-col gap-4">
       <h1 className="text-2xl font-bold text-gray-800 text-center">
@@ -135,6 +169,21 @@ int main() {
           {output}
         </pre>
       )}
+      <CodeModal
+        analysis={showAnalysis ? analysis : null}
+        onClose={() => setShowAnalysis(false)}
+      />
+      <button
+        onClick={handleAnalyze}
+        disabled={analyzing}
+        className={`w-[12rem] py-2 rounded text-white transition ${
+          analyzing
+            ? "bg-gray-400 cursor-not-allowed"
+            : "bg-purple-600 hover:bg-purple-700 cursor-pointer"
+        }`}
+      >
+        {analyzing ? "Analyzing..." : "Analyze Code"}
+      </button>
       <div>
         <button
           onClick={handleRun}
