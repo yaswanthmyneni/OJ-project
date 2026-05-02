@@ -54,7 +54,7 @@ int main() {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:8001/compile/submit",
+        `${import.meta.env.VITE_SERVER_BASE_URL}/compile/submit`,
         {
           problemId,
           lang,
@@ -87,7 +87,7 @@ int main() {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:8001/compile/run",
+        `${import.meta.env.VITE_SERVER_BASE_URL}/compile/run`,
         {
           problemId,
           lang,
@@ -111,8 +111,10 @@ int main() {
     try {
       setAnalyzing(true);
 
-      const res = await axios.post("http://localhost:8001/ai/code-analysis", {
-        prompt: `
+      const res = await axios.post(
+        `${import.meta.env.VITE_SERVER_BASE_URL}/ai/code-analysis`,
+        {
+          prompt: `
 Language: ${language}
 
 Code:
@@ -123,7 +125,8 @@ Analyze this code and provide:
 - Bugs (if any)
 - Improvements
 `,
-      });
+        },
+      );
 
       setAnalysis(res.data.reply);
       setShowAnalysis(true);

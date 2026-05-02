@@ -12,9 +12,12 @@ const SingleProblem = () => {
   useEffect(() => {
     const fetchProblem = async () => {
       try {
-        const res = await axios(`http://localhost:8001/problem/${id}`, {
-          withCredentials: true,
-        });
+        const res = await axios(
+          `${import.meta.env.VITE_SERVER_BASE_URL}/problem/${id}`,
+          {
+            withCredentials: true,
+          },
+        );
 
         if (!res.data.success) {
           throw new Error(data.message);

@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const COMPILE_BASE_URL = process.env.COMPILE_URL || "http://localhost:6000";
+const COMPILE_BASE_URL =
+  process.env.COMPILE_URL || `${process.env.COMPILER_URL}`;
 
 const runCode = (data) => {
   return axios.post(`${COMPILE_BASE_URL}/run`, data);

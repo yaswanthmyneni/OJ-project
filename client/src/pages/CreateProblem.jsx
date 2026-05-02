@@ -38,7 +38,7 @@ const CreateProblem = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8001/problem/create",
+        `${import.meta.env.VITE_SERVER_BASE_URL}/problem/create`,
         {
           ...form,
           testcases,

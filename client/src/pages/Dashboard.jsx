@@ -5,7 +5,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await axios.get("http://localhost:8001/user/logout", {
+    await axios.get(`${import.meta.env.VITE_SERVER_BASE_URL}/user/logout`, {
       withCredentials: true,
     });
     navigate("/");

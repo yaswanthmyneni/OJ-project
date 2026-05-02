@@ -8,12 +8,19 @@ const Register = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    const res = await axios.post("http://localhost:8001/user/signup", form, {
-      withCredentials: true,
-    });
-    const res2 = await axios.get("http://localhost:8001/user/dashboard", {
-      withCredentials: true,
-    });
+    const res = await axios.post(
+      `${import.meta.env.VITE_SERVER_BASE_URL}/user/signup`,
+      form,
+      {
+        withCredentials: true,
+      },
+    );
+    const res2 = await axios.get(
+      `${import.meta.env.VITE_SERVER_BASE_URL}/user/dashboard`,
+      {
+        withCredentials: true,
+      },
+    );
     if (res2.data.user) {
       navigate("/dashboard");
     }
